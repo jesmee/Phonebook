@@ -1,0 +1,39 @@
+@startuml ERDiagram
+
+!define PK <<PK,PK>>
+!define FK <<FK,FK>>
+!define LF <<FK_L,LF>>
+
+entity "PhoneBook" as PhoneBook {
+  + phonebook_id PK
+  --
+  name
+}
+
+entity "Person" as Person {
+  + person_id PK
+  --
+  first_name
+  last_name
+}
+
+entity "PhoneNumber" as PhoneNumber {
+  + phone_number_id PK
+  --
+  phone_number
+  phone_type
+  person_id FK
+}
+
+entity "PersonPhoneBook" as PersonPhoneBook {
+  + person_phonebook_id PK
+  --
+  person_id FK
+  phonebook_id FK
+}
+
+Person ||--|{ PersonPhoneBook
+PhoneBook ||--|{ PersonPhoneBook
+Person }|--|| PhoneNumber
+
+@enduml
