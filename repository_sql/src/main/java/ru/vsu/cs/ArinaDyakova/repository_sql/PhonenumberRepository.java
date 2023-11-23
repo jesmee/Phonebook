@@ -97,7 +97,7 @@ public class PhonenumberRepository implements CRUDRepo<Phonenumber> {
                 tableName, phonenumber.getPhoneType(), phonenumber.getPhoneNumber(), phonenumber.getPersonId(), phonenumber.getId());
 
         try {
-            if (conn.update(query) == 1) {
+            if (conn.update(query) != 1) {
                 throw new RuntimeException();
             }
         } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class PhonenumberRepository implements CRUDRepo<Phonenumber> {
         String query = String.format("DELETE FROM %s WHERE id = %d",
                 tableName, id);
         try {
-            if (conn.delete(query) == 1) {
+            if (conn.delete(query) != 1) {
                 throw new RuntimeException();
             }
         } catch (SQLException e) {
